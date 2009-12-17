@@ -1,0 +1,103 @@
+  _________ __              ___________.__       .__     __                
+ /   _____//  |______ ______\_   _____/|__| ____ |  |___/  |_  ___________ 
+ \_____  \\   __\__  \\_  __ \    __)  |  |/ ___\|  |  \   __\/ __ \_  __ \
+ /        \|  |  / __ \|  | \/     \   |  / /_/  >   Y  \  | \  ___/|  | \/
+/_______  /|__| (____  /__|  \___  /   |__\___  /|___|  /__|  \___  >__|   
+        \/           \/          \/      /_____/      \/          \/       
+
+Group:
+  Long Cheng        cs184-cy
+  Kyle Conroy       cs184-cz
+  Jillian Moore     cs184-cx
+  Wei Yeh           cs184-df
+
+Platform:
+    Mac OS X 10.6 - Snow Leopard
+    
+#####################
+# Compilation
+#####################
+
+Use "make"; resulting executable is named "starfighter"
+
+
+#####################
+# Usage
+#####################
+
+./starfighter -f <levelListFile>
+
+
+#####################
+# Input File Spec
+#####################
+
+The input file is a level list with pairs
+
+<level> highScore
+
+separated by newlines. <level>.level refers to the level file in the same directory.
+
+A level file consists of geometry definitions and model definitions.
+
+#####################
+# Level File Spec
+#####################
+
+Some entries have options [option1 | option2]
+
+# Loading a .obj mesh
+
+{
+    objgeometry                 #
+    name unique-name            # must be a unique name
+    path path/to/file           # relative path
+    bs [box | sphere]           # OPTIONAL sets the bounding shape, default is box
+    boundingsphere x y z r      # OPTIONAL explicitly sets the bounding sphere 
+    boundingsphere x y z x y z  # OPTIONAL explicitly sets the bounding box
+}
+
+
+#####################
+# Gameplay
+#####################
+
+The objective of StarFighter is to fly and blast through asteroids
+and alien spacecrafts, making it to the end of the level with a high score.
+The ship is controlled entirely with the mouse. Lasers are fired by clicking
+the mouse button. The ship can also launch bombs by holding down the mouse
+button and releasing it after at least half a second. The longer the mouse button
+is held down, the further the bomb travels. Bombs are detonated by pressing the space bar.
+
+#####################
+# Features
+#####################
+
+* animation and UI using OpenGL and GLUT
+* detailed collision detection, optimized using bounding boxes/spheres and kd-trees
+* ray tracing technique used to fire lasers/missiles
+* gravity-affected, bounce-able projectile simulation with bombs
+* mouse controlled x/y thrust
+* basic AI with kamikaze enemy spacecrafts
+* level input file parsing to construct world, using OBJ output of objects designed in Maya
+
+
+#####################
+# Libraries Used
+#####################
+
+* Eigen vector/matrix library
+* FreeImage for writing images
+* SOIL (Simple OpenGL Image Library) for texture input
+
+
+#####################
+# Other Credits
+#####################
+
+* Ship and Kamakazi model from sender pinarci, on TurboSquid
+    * http://www.turbosquid.com/3d-models/sendercorp-sender-ma-free/429728
+    * http://www.turbosquid.com/FullPreview/Index.cfm/ID/433482
+* Asteroid models from Setro on turbo squid
+    * http://www.turbosquid.com/3d-models/free-3ds-model-stones/497091
+* Sound effects from http://freesound.org

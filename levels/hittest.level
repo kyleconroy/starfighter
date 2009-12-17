@@ -1,0 +1,211 @@
+
+#geometry
+
+{
+    objgeometry
+    name ball
+    bs sphere
+    path geometry/ball.obj
+}
+
+{
+    objgeometry
+    name land
+    boundingbox 0 0 0 0 0 0
+    path geometry/land.obj
+}
+
+gravity 0 -9.8 0
+
+world_depth -54.0
+
+#models
+
+##############################
+###### WORLD
+##############################
+
+{
+    wall
+    type left
+    move -5
+}
+
+{
+    wall
+    type right
+    move 5  
+}
+
+{
+    wall
+    type top
+    move 10
+}
+
+{
+    wall
+    type bottom
+    move -10 
+}
+
+{
+    wall
+    type front
+    move 0   
+}
+
+{
+    wall
+    type back
+    move -20
+}
+
+##############################
+###### TERRAIN
+##############################
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 0 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -5 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -10 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -15 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -20 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -25 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -30 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -35 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -40 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -45 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -50 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -55 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -60 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -65 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -70 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -1 -75 
+    color 0.7 0.4 0.4
+}
+

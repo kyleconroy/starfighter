@@ -1,0 +1,317 @@
+
+#geometry
+
+{
+    objgeometry
+    name floor
+    boundingbox -12 -13 -5 12 0 5
+}
+
+{
+    objgeometry
+    name land
+    boundingbox 0 0 0 0 0 0
+    path geometry/land.obj
+}
+
+gravity 0 -9.8 0
+enemies off
+world_depth -54.0
+
+#models
+
+##############################
+###### WORLD
+##############################
+
+{
+    wall
+    type left
+    move -5
+}
+
+{
+    wall
+    type right
+    move 5  
+}
+
+{
+    wall
+    type top
+    move 10
+}
+
+{
+    wall
+    type bottom
+    move -10 
+}
+
+{
+    wall
+    type front
+    move 0   
+}
+
+{
+    wall
+    type back
+    move -20
+}
+
+##############################
+###### TERRAIN
+##############################
+
+{
+    environmentmodel
+    geometry floor
+    scale 100 1 1
+    rotate 0 90 0
+    translate 0 -2 0 
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 0 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -5 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -10
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -15 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -20
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -25 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -30
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -35
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -40
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -45 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -50 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -55 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -60 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -65 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -70 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -75 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -80 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -85 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -90 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -95 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -100 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -105 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -110 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -115 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -120 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -125 
+    color 0.7 0.4 0.4
+}
+
+{
+    environmentmodel
+    geometry land
+    scale 1 1 1
+    rotate 0 90 0
+    translate 0 -2 -130 
+    color 0.7 0.4 0.4
+}
+

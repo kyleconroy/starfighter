@@ -1,0 +1,103 @@
+#geometry
+
+world_depth -108.0
+enemies off
+
+{
+    objgeometry
+    name cow
+    path geometry/cube.obj
+}
+
+{
+    objgeometry
+    name ball
+    boundingsphere 0 0 0 1
+    path geometry/ball.obj
+}
+
+{
+    objgeometry
+    name as1
+    bs sphere
+    path geometry/asteroid1.obj
+}
+
+{
+    objgeometry
+    name land
+    path geometry/land.obj
+}
+
+gravity 0 -9.8 0
+
+#models
+
+{
+    wall
+    type left
+    move -5
+}
+
+{
+    wall
+    type right
+    move 5  
+}
+
+{
+    wall
+    type top
+    move 10
+}
+
+{
+    wall
+    type bottom
+    move -10 
+}
+
+{
+    wall
+    type front
+    move 0   
+}
+
+{
+    wall
+    type back
+    move -15   
+}
+
+
+{
+    passivemodel
+    indestructable
+    geometry cow
+    translate 2 -3 -3
+}
+
+
+{
+    passivemodel
+    indestructable
+    geometry ball
+    rotate 34 23 12
+    scale .5 .5 .5 
+    translate -2 0 -2
+}
+
+{
+    passivemodel
+    indestructable
+    geometry ball
+    rotate 34 23 12
+    scale .4 .4 .4 
+    translate -1 0 -3
+}
+
+{
+    ship
+    translate 0 0 -.5
+    frozen
+}

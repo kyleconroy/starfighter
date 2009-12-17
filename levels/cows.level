@@ -1,0 +1,130 @@
+#geometry
+
+{
+    objgeometry
+    name cow
+    path geometry/cow.obj
+}
+
+{
+    objgeometry
+    name ball
+    path geometry/ball.obj
+}
+
+{
+    objgeometry
+    name land
+    path geometry/land.obj
+}
+
+gravity 0 -9.8 0
+
+#models
+
+{
+    wall
+    type left
+    move -5
+}
+
+{
+    wall
+    type right
+    move 5  
+}
+
+{
+    wall
+    type top
+    move 10
+}
+
+{
+    wall
+    type bottom
+    move -10 
+}
+
+{
+    wall
+    type front
+    move 0   
+}
+
+{
+    wall
+    type back
+    move -5   
+}
+
+
+{
+    passivemodel
+    geometry ball
+    scale .05 .05 .05
+    rotate 15 90 0
+    translate 0 0 -10
+    color 1.0 0 0
+}
+
+{
+    passivemodel
+    geometry cow
+    scale 1 1 1
+    rotate 0 0 0
+    translate 0 0 -3
+    color 0 1.0 0
+}
+
+{
+    passivemodel
+    indestructable
+    geometry cow
+    scale 1 1 1
+    rotate 0 0 0
+    translate 0 .2 -3
+    color 0 0 1.0
+}
+
+{
+    passivemodel
+    indestructable
+    geometry cow
+    scale 1 1 1
+    rotate 0 0 0
+    translate 0 .4 -3
+    color 1.0 1.0 0
+}
+
+{
+    environmentmodel
+    geometry land
+    rotate 0 90 0
+    translate 0 -1 0
+    color 0.2 0.6 0.2
+}
+
+
+{
+    passivemodel
+    rotate 0 0 80
+    geometry ball
+    scale .05 .05 .05
+    translate 0.5 0 -3
+    color 0.5 0.5 0.5
+}
+
+{
+    passivemodel
+    geometry ball
+    rotate 45 0 0
+    scale .05 .05 .05
+    translate -1 0 -3
+    color 0.2 0.2 0.6
+}
+
+{ 
+    ship
+    rotate 0 0 0 
+}
