@@ -66,7 +66,6 @@ void Ship::updateDirection(unsigned int mouseX, unsigned int mouseY,
 }
 
 void Ship::draw() {
-    if (!mesh) return;
     glPushMatrix();
     
     glTranslatef(position.x(), position.y(), position.z());

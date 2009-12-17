@@ -4,6 +4,7 @@
 #include "game.h"
 #include "ship.h"
 #include "passivemodel.h"
+#include "asteroid.h"
 #include "freeimage/FreeImage.h"
 
 using namespace std;
@@ -82,10 +83,12 @@ static void glInit(int argc, char *argv[]) {
     
     glutSetCursor(GLUT_CURSOR_NONE);
     
-    //glutFullScreen();
+    glutFullScreen();
 
     Explosion::loadAnimationFrames();
 	EnvironmentModel::loadImage((char *) "textures/grid.png");
+    Asteroid::loadMeshes();
+	
     getCurrentTime(&lastTime);
     getCurrentTime(&lastTimeMouse);
 

@@ -71,10 +71,6 @@ public:
         if (dead) {
             return;
         }
-        if (mesh) {
-            delete mesh;
-        }
-        mesh = NULL;
 		color = Eigen::Vector3f(1.0,1.0,1.0);
 		scale = Eigen::Vector3f(1.0,1.0,1.0);
 		rotate = Eigen::Vector3f(0.0,0.0,0.0);

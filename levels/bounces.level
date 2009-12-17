@@ -74,7 +74,7 @@ gravity 0 -9.8 0
     passivemodel
     indestructable
     geometry cow
-    translate 2 -3 -3
+    translate 2 0 -3
 }
 
 

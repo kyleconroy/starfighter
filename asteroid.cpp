@@ -2,6 +2,8 @@
 #include "objgeometry.h"
 #include "model.h"
 
+ObjGeometry *Asteroid::asteroidMesh[NUM_ASTEROIDS];
+
 Asteroid::Asteroid() : Ball() {
 	damage = 20;
 	health = 3;
@@ -20,9 +22,7 @@ Asteroid::Asteroid(int num) : Ball() {
 	damage = 20;
 	health = 1;
 	score = 20;
-	char filename [50];
-	sprintf(filename, "geometry/asteroid%d.obj", num);
-	mesh = new ObjGeometry(filename);
+	mesh = asteroidMesh[num-1];
     ObjGeometry *ast;
     ast = (ObjGeometry*) mesh;
 	ast->calcBoundingSphere();
@@ -32,16 +32,16 @@ Asteroid::Asteroid(int num) : Ball() {
 	isAsteroid = true;
 }
 
-//Asteroid::Asteroid(Eigen::Vector3f pos, Eigen::Vector3f vel) : Ball(pos, vel) {
-//	damage = 100;
-//	health = 3;
-//	score = 20;
-//}
-
 void Asteroid::updateEnemy(Level * currLev) {
-	//rotate.y() += 3;
-	//rotate.z() += 3;
 	if (!dead) {
 		rotate.x() += 3;
 	}
+}
+
+void Asteroid::loadMeshes() {
+    char filename[50];
+    for (size_t i = 0; i < NUM_ASTEROIDS; i++) {
+        sprintf(filename, "geometry/asteroid%lu.obj", i+1);
+        asteroidMesh[i] = new ObjGeometry(filename);
+    }
 }

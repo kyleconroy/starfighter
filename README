@@ -14,6 +14,10 @@ Group:
 Platform:
     Mac OS X 10.6 - Snow Leopard
     
+Submitted by:
+    Wei Yeh
+
+    
 #####################
 # Compilation
 #####################
@@ -69,16 +73,16 @@ the mouse button. The ship can also launch bombs by holding down the mouse
 button and releasing it after at least half a second. The longer the mouse button
 is held down, the further the bomb travels. Bombs are detonated by pressing the space bar.
 
+
 #####################
 # Features
 #####################
 
 * animation and UI using OpenGL and GLUT
-* detailed collision detection, optimized using bounding boxes/spheres and kd-trees
+* detailed collision detection, optimized using object-aligned bounding boxes/spheres and kd-trees
 * ray tracing technique used to fire lasers/missiles
-* gravity-affected, bounce-able projectile simulation with bombs
+* gravity-affected, bounce-able projectile simulation with balls
 * mouse controlled x/y thrust
-* basic AI with kamikaze enemy spacecrafts
 * level input file parsing to construct world, using OBJ output of objects designed in Maya
 
 
@@ -87,6 +91,7 @@ is held down, the further the bomb travels. Bombs are detonated by pressing the 
 #####################
 
 * Eigen vector/matrix library
+* kdtree (http://code.google.com/p/kdtree/)
 * FreeImage for writing images
 * SOIL (Simple OpenGL Image Library) for texture input
 
