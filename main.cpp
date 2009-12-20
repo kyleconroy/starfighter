@@ -5,7 +5,7 @@
 #include "ship.h"
 #include "passivemodel.h"
 #include "asteroid.h"
-#include "freeimage/FreeImage.h"
+// #include "freeimage/FreeImage.h"
 
 using namespace std;
 
@@ -209,47 +209,47 @@ static void reshape(int width, int height) {
 }
 
 static void captureToImageFile() {
-    static unsigned int picNum = 0;
-    FreeImage_Initialise();
-    
-    FIBITMAP *bitmap = FreeImage_Allocate(game.width, game.height, 24);
-    
-    if (!bitmap) {
-        debug("screenshot failed!");
-        return;
-    }
-    
-    int width = int(game.width);
-    int height = int(game.height);
-    
-    debug("capturing screen of size (%d, %d)", width, height);
-    GLubyte *pixels = (GLubyte *) malloc(3 * width * height);
-    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-    int rowWidth = (3 * width);
-    int rowIndex;
-    RGBQUAD color;
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            rowIndex = (y * rowWidth) + (3 * x);
-            color.rgbRed = pixels[rowIndex + 0];
-            color.rgbGreen = pixels[rowIndex + 1];
-            color.rgbBlue = pixels[rowIndex + 2];
-            FreeImage_SetPixelColor(bitmap, x, y, &color);
-        }
-    }
-    
-    char imageFileName[] = "image-00.png";
-    imageFileName[7] = '0' + picNum;
-    if (FreeImage_Save(FIF_PNG, bitmap, imageFileName, 0)) {
-        picNum++;
-        cout << "successfully captured screenshot to " << string(imageFileName) << endl;
-    } else {
-        cout << "failed to capture screenshot" << endl;
-    }
-    
-    free(pixels);
-    
-    FreeImage_DeInitialise();
+    // static unsigned int picNum = 0;
+    // FreeImage_Initialise();
+    // 
+    // FIBITMAP *bitmap = FreeImage_Allocate(game.width, game.height, 24);
+    // 
+    // if (!bitmap) {
+    //     debug("screenshot failed!");
+    //     return;
+    // }
+    // 
+    // int width = int(game.width);
+    // int height = int(game.height);
+    // 
+    // debug("capturing screen of size (%d, %d)", width, height);
+    // GLubyte *pixels = (GLubyte *) malloc(3 * width * height);
+    // glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+    // int rowWidth = (3 * width);
+    // int rowIndex;
+    // RGBQUAD color;
+    // for (int y = 0; y < height; y++) {
+    //     for (int x = 0; x < width; x++) {
+    //         rowIndex = (y * rowWidth) + (3 * x);
+    //         color.rgbRed = pixels[rowIndex + 0];
+    //         color.rgbGreen = pixels[rowIndex + 1];
+    //         color.rgbBlue = pixels[rowIndex + 2];
+    //         FreeImage_SetPixelColor(bitmap, x, y, &color);
+    //     }
+    // }
+    // 
+    // char imageFileName[] = "image-00.png";
+    // imageFileName[7] = '0' + picNum;
+    // if (FreeImage_Save(FIF_PNG, bitmap, imageFileName, 0)) {
+    //     picNum++;
+    //     cout << "successfully captured screenshot to " << string(imageFileName) << endl;
+    // } else {
+    //     cout << "failed to capture screenshot" << endl;
+    // }
+    // 
+    // free(pixels);
+    // 
+    // FreeImage_DeInitialise();
 }
 
 static void keyPressed(unsigned char key, int x, int y) {

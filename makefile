@@ -21,7 +21,7 @@ MACINCS = -L"/System/Library/Frameworks/OpenGL.framework/Libraries"
 EIGEN = -I eigen2
 FIMAGE = -L./freeimage -lfreeimage
 CCOPTS = $(OPTMAC) $(MACINCS) $(EIGEN) -DOSX -fast
-LDOPTS = $(CCOPTS) $(MACLIBS) $(FIMAGE)
+LDOPTS = $(CCOPTS) $(MACLIBS)
 
 default: $(TARGETS)
 
