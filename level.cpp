@@ -48,7 +48,6 @@ void Level::update() {
     }
 
     if (enemieson){
-        debug("hey");
         generateEnemies();
     }
     
@@ -200,9 +199,12 @@ void Level::clean() {
         model = amodels->at(i);
         if(model->dead){
             amodels->erase(amodels->begin()+i);
+            if (model->isAsteroid)
+                debug("Deleted an asteroid");
+            else
+                debug("Deleted an acitve model");
             delete model;
             i--;
-            debug("Deleted an acitve model");
         }
     }
     for (size_t i = 0; i < bombs->size(); i++) {
