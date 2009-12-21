@@ -18,18 +18,16 @@ public:
     void dump();
     void createTree();
     void updateATree();
-    void updateEnemies();
     void generateEnemies();
     void drawHealthBar();
     void drawScore();
     void calculateMaxRadius();
-    void removeActiveModel(int);
+    void clean();
     
     kdtree *ptree;
     kdtree *atree;
     ModelList *pmodels;
     ModelList *amodels;
-    EnemeyList *enemies;
     GeometryList *geometries;
     BombList *bombs;
     WallList *walls;

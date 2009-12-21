@@ -50,7 +50,7 @@ enum Direction {
 #define PI 3.14159265
 #define DEGREES_TO_RADIANS(deg) (deg * PI/180.0)
 #define RADIANS_TO_DEGREES(rad) (rad * 180.0/PI)
-#define DEBUG false
+#define DEBUG true
 #ifdef _WIN32
     #define TIME DWORD
 #else

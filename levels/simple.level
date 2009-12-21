@@ -9,6 +9,14 @@
 
 {
     objgeometry
+    name ball
+    boundingsphere 0 0 0 1
+    path geometry/ball.obj
+}
+
+
+{
+    objgeometry
     name land
     boundingbox 0 0 0 0 0 0
     path geometry/land.obj
@@ -313,5 +321,18 @@ world_depth -54.0
     rotate 0 90 0
     translate 0 -2 -130 
     color 0.7 0.4 0.4
+}
+
+{
+    ship
+    frozen
+}
+
+{
+    passivemodel
+    geometry ball
+    rotate 34 23 12
+    scale .5 .5 .5 
+    translate -2 0 -2
 }
 

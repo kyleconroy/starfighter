@@ -74,7 +74,8 @@ public:
 		color = Eigen::Vector3f(1.0,1.0,1.0);
 		scale = Eigen::Vector3f(1.0,1.0,1.0);
 		rotate = Eigen::Vector3f(0.0,0.0,0.0);
-		mesh = new Explosion();
+		//mesh = new Explosion();
+        mesh = NULL;
         dead = true;
 	}
 

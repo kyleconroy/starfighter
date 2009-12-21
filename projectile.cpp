@@ -1,7 +1,11 @@
 #include "projectile.h"
-#include "objgeometry.h"
+
 
 #define METER 0.00168
+
+ObjGeometry *Missile::missileMesh;
+
+ObjGeometry *Bomb::bombMesh;
 
 Projectile::Projectile(Model *src) {
     source = src;
@@ -52,7 +56,7 @@ Missile::Missile(Eigen::Vector3f pos, Eigen::Vector3f vel) : Projectile(pos, vel
 }
 
 void Missile::init() {
-    mesh = new ObjGeometry("geometry/laser.obj");
+    mesh = missileMesh;
     radius = 0.050;
     velocity *= 2.5;
     shipPart = true;
@@ -74,8 +78,13 @@ void Missile::die() {
     dead = true;
 }
 
+void Missile::loadMeshes(){
+    missileMesh = new ObjGeometry("geometry/laser.obj");
+    debug("Loaded missile mesh");
+}
+
 Bomb::Bomb(float power, Model *src) : Projectile(src) {
-    mesh = new ObjGeometry("geometry/ball.obj");
+    mesh = bombMesh;
     t = 0;
     color = Eigen::Vector3f(1.0, 0, 0);
     radius = 0.050;
@@ -98,6 +107,11 @@ void Bomb::applyForce(Force *force) {
 void Bomb::hit(Model *model){
     model->bs->center = model->position;
     model->bs->bounce(&position, &velocity, radius);
+}
+
+void Bomb::loadMeshes(){
+    bombMesh = new ObjGeometry("geometry/ball.obj");
+    debug("Loaded bomb mesh");
 }
 
 MissileList *Bomb::explode() {

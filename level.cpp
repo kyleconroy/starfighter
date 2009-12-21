@@ -15,7 +15,6 @@
 Level::Level() {
     amodels = new ModelList();
     pmodels = new ModelList();
-    enemies = new EnemeyList();
     geometries = new GeometryList();
     bombs = new BombList();
     walls = new WallList();
@@ -37,7 +36,6 @@ Level::~Level() {
     delete amodels;
     for (i = 0; i < pmodels->size(); i++) delete pmodels->at(i);
     delete pmodels;
-    delete enemies;
     delete geometries;
     delete bombs;
     delete walls;
@@ -50,8 +48,8 @@ void Level::update() {
     }
 
     if (enemieson){
+        debug("hey");
         generateEnemies();
-        updateEnemies();
     }
     
     updateActiveModels();
@@ -70,7 +68,7 @@ void Level::updateActiveModels() {
                 am->applyForce(forces->at(j));
             }
             am->update();
-        }
+        } 
     }
     updateATree();
 }
@@ -97,7 +95,7 @@ void Level::checkActiveCollisions() {
                 if (bsh->intersect((BoundingSphere *) am->bs)) {
                     model = bsh->model;
                     if (!model->dead && !am->dead) {
-                        debug("Passive Hit");
+                        //debug("Passive Hit");
                         
                         if(!am->isAsteroid){
                             model->hit(am);
@@ -189,17 +187,32 @@ void Level::checkWallCollisions() {
         for (size_t j = 0; j < amodels->size(); j++) {
             am = (ActiveModel *) amodels->at(j);
             if (w->collide(am->position, ship->position)) {
-                removeActiveModel(j);
-                j--;
-                debug("OBJECT REMOVED");
+                am->die();
+                debug("Wall Hit");
             }
         }
     }
 }
 
-void Level::removeActiveModel(int j) {
-    // delete amodels->at(j);
-    amodels->erase(amodels->begin()+j);
+void Level::clean() {
+    Model *model;
+    for (size_t i = 0; i < amodels->size(); i++) {
+        model = amodels->at(i);
+        if(model->dead){
+            amodels->erase(amodels->begin()+i);
+            delete model;
+            i--;
+            debug("Deleted an acitve model");
+        }
+    }
+    for (size_t i = 0; i < bombs->size(); i++) {
+        model = (Model*) bombs->at(i);
+        if(model->dead){
+            bombs->erase(bombs->begin()+i);
+            i--;
+            debug("Removed a bomb");
+        }
+    }
 }
 
 void Level::calculateMaxRadius() {
@@ -263,6 +276,7 @@ void Level::dump() {
 void Level::draw(float farClippingPlane) {    
     drawActive(farClippingPlane);
     drawPassive(farClippingPlane);
+    clean();
 }
 
 void Level::drawActive(float farClippingPlane) {
@@ -282,14 +296,6 @@ void Level::drawPassive(float farClippingPlane) {
         if (model->position.z() < farClippingPlane && !behindShip(model)) {
             model->draw();
         }
-    }
-}
-
-void Level::updateEnemies() {
-    Enemy *enemy;
-    for (size_t i = 0; i < enemies->size(); i++) {
-        enemy = enemies->at(i);
-        enemy->updateEnemy(this);
     }
 }
 
@@ -333,8 +339,6 @@ void Level::generateEnemies() {
 		
 		//BS INIT
         rock->bs->transform(&rock->transM, rock->scale[0]);
-
-		enemies->push_back((Enemy *)rock);
 		amodels->push_back(rock);
 	}
 

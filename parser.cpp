@@ -70,11 +70,13 @@ bool Parser::parseLine(std::string line) {
     } else if (oper.compare("wall") == 0) {
         parseWall(line);
     } else if (oper.compare("gravity") == 0) {
+        LOG("[Parser] \t Parsing Gravity: " << line, 1);
         float x, y, z;
         ss >> x >> y >> z;
         Force *g = new Gravity(x,y,z);
         level->forces->push_back(g);
     } else if (oper.compare("world_depth") == 0) {
+        LOG("[Parser] \t World Depth: " << line, 1);
         ss >> level->worldDepth;
     } else if (oper.compare("enemies") == 0) {
         std::string swtc;
