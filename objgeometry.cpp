@@ -19,6 +19,10 @@ ObjGeometry::ObjGeometry(std::string path) : Geometry("objmodel") {
     update();
 };
 
+ObjGeometry::~ObjGeometry() {
+    kd_free(vtree);
+};
+
 void ObjGeometry::draw() {
 	for (unsigned int i = 0; i < faces.size(); i++) {
 		glBegin(GL_POLYGON);

@@ -12,6 +12,7 @@ class ObjGeometry : public Geometry {
 public:
     ObjGeometry();
     ObjGeometry(std::string);
+    ~ObjGeometry();
     void dump();
     void draw();
     void update();
@@ -25,7 +26,7 @@ public:
     bool intersect(Eigen::Vector3f, float);
     
     std::string objpath;
-    kdtree * vtree;
+    kdtree *vtree;
     
     std::vector<Eigen::Vector3f> vertices;
     std::vector< std::vector<int> > vertfaces;

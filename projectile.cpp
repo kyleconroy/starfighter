@@ -9,39 +9,45 @@ ObjGeometry *Bomb::bombMesh;
 
 Projectile::Projectile(Model *src) {
     source = src;
-    
-	/* Calculate projectile location and velocity. */
-	Eigen::Vector3f center = source->position;
-	float offset = source->radius;
-	float rotationY = source->rotate.y();
-	float rotationX = source->rotate.x();
-	
-	rotationY = DEGREES_TO_RADIANS(-rotationY);
-	rotationX = DEGREES_TO_RADIANS(-rotationX);
-	
-	/* Basically start with unit vector centered at origin
-	 * Rotate it, then scale it based on radius of our ship
-	 * finally translate its center to be the center of the ship */
-	Eigen::Vector3f projPos = center;
-	Eigen::Vector3f unitPos = Eigen::Vector3f(1.0, 0.0, 0.0);
 
-	Eigen::Matrix3f rotationMatrixY, rotationMatrixX;
-	rotationMatrixY << cos(rotationY), 0, -sin(rotationY), 0, 1, 0, sin(rotationY), 0, cos(rotationY);
-	rotationMatrixX << 1, 0, 0, 0, cos(rotationX), sin(rotationX), 0, -sin(rotationX), cos(rotationX);
+    /* Calculate projectile location and velocity. */
+    Eigen::Vector3f center = source->position;
+    float offset = source->radius;
+    float rotationY = source->rotate.y();
+    float rotationX = source->rotate.x();
 
-	unitPos = rotationMatrixX * rotationMatrixY * unitPos;
-	unitPos *= offset;
-	projPos += unitPos;
+    rotationY = DEGREES_TO_RADIANS(-rotationY);
+    rotationX = DEGREES_TO_RADIANS(-rotationX);
 
-	Eigen::Vector3f bombVel = projPos - center;
-	
-	velocity = bombVel;
-	position = projPos;
-	rotate = source->rotate;
+    /* Basically start with unit vector centered at origin
+     * Rotate it, then scale it based on radius of our ship
+     * finally translate its center to be the center of the ship */
+    Eigen::Vector3f projPos = center;
+    Eigen::Vector3f unitPos = Eigen::Vector3f(1.0, 0.0, 0.0);
+
+    Eigen::Matrix3f rotationMatrixY, rotationMatrixX;
+    rotationMatrixY << cos(rotationY), 0, -sin(rotationY), 0, 1, 0, sin(rotationY), 0, cos(rotationY);
+    rotationMatrixX << 1, 0, 0, 0, cos(rotationX), sin(rotationX), 0, -sin(rotationX), cos(rotationX);
+
+    unitPos = rotationMatrixX * rotationMatrixY * unitPos;
+    unitPos *= offset;
+    projPos += unitPos;
+
+    Eigen::Vector3f bombVel = projPos - center;
+
+    velocity = bombVel;
+    position = projPos;
+    rotate = source->rotate;
 }
 
 Projectile::Projectile(Eigen::Vector3f pos, Eigen::Vector3f vel) : ActiveModel(pos, vel) {
     source = NULL;
+}
+
+Projectile::~Projectile() {
+    if (bs) {
+        delete bs;
+    }
 }
 
 Missile::Missile(Model *src) : Projectile(src) {
@@ -61,13 +67,12 @@ void Missile::init() {
     velocity *= 2.5;
     shipPart = true;
     scale = Eigen::Vector3f(3, 3, 2);
-    //BS INIT
+    t = 0;
+    color = Eigen::Vector3f(0, 1.0, 0);
     calculateTransform();
     bs = new BoundingSphere(this);
     bs->update(mesh);
     bs->transform(&transM, scale[1]);
-    t = 0;
-    color = Eigen::Vector3f(0, 1.0, 0);
 }
 
 void Missile::die() {
@@ -78,7 +83,7 @@ void Missile::die() {
     dead = true;
 }
 
-void Missile::loadMeshes(){
+void Missile::loadMeshes() {
     missileMesh = new ObjGeometry("geometry/laser.obj");
     debug("Loaded missile mesh");
 }
@@ -90,7 +95,7 @@ Bomb::Bomb(float power, Model *src) : Projectile(src) {
     radius = 0.050;
     velocity += 2*velocity*power;
     scale = Eigen::Vector3f(.05, .05, .05);
-    //BS INIT
+
     calculateTransform();
     bs = new BoundingSphere(this);
     bs->update(mesh);
@@ -100,7 +105,7 @@ Bomb::Bomb(float power, Model *src) : Projectile(src) {
 
 void Bomb::applyForce(Force *force) {
     if (dead) return;
-    
+
     force->affect(this);
 }
 
@@ -109,7 +114,7 @@ void Bomb::hit(Model *model){
     model->bs->bounce(&position, &velocity, radius);
 }
 
-void Bomb::loadMeshes(){
+void Bomb::loadMeshes() {
     bombMesh = new ObjGeometry("geometry/ball.obj");
     debug("Loaded bomb mesh");
 }

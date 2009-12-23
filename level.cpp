@@ -1,7 +1,7 @@
 #include "level.h"
 #include "log.h"
 #include "activemodel.h"
-#include "ball.h"
+#include "projectile.h"
 #include "asteroid.h"
 #include "kamikaze.h"
 #include "turret.h"
@@ -36,9 +36,17 @@ Level::~Level() {
     delete amodels;
     for (i = 0; i < pmodels->size(); i++) delete pmodels->at(i);
     delete pmodels;
-    delete geometries;
+    for (i = 0; i < bombs->size(); i++) delete bombs->at(i);
     delete bombs;
+    for (i = 0; i < walls->size(); i++) delete walls->at(i);
     delete walls;
+    for (i = 0; i < forces->size(); i++) delete forces->at(i);
+    delete forces;
+    for (i = 0; i < geometries->size(); i++) delete geometries->at(i);
+    delete geometries;
+    
+    kd_free(ptree);
+    kd_free(atree);
 }
 
 void Level::update() {
@@ -47,7 +55,7 @@ void Level::update() {
         frame = 0;
     }
 
-    if (enemieson){
+    if (enemieson) {
         generateEnemies();
     }
     
@@ -55,7 +63,6 @@ void Level::update() {
     checkActiveCollisions();
     checkShipCollisions();
     checkWallCollisions();
-    
 }
 
 void Level::updateActiveModels() {
@@ -242,7 +249,7 @@ void Level::createTree() {
 }
 
 void Level::updateATree() {
-    kd_clear(atree);
+    kd_free(atree);
     atree = kd_create(3);
     Model *model;
     for (size_t i = 0; i < amodels->size(); i++) {

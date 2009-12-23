@@ -3,11 +3,8 @@
 #include "log.h"
 #include "game.h"
 #include "ship.h"
-#include "passivemodel.h"
-#include "asteroid.h"
 #include "projectile.h"
-
-// #include "freeimage/FreeImage.h"
+#include "asteroid.h"
 
 using namespace std;
 
@@ -21,7 +18,6 @@ static void setUpCamera();
 static void setUpLighting();
 static void setUpShading();
 static void reshape(int width, int height);
-static void captureToImageFile();
 static void keyPressed(unsigned char key, int x, int y);
 static void keyPressedSpecial(int key, int x, int y);
 static void mouseClicked(int button, int state, int x, int y);
@@ -45,24 +41,24 @@ string functions[] = {"Movement", "Fire ze missiles", "Shoot ze bombs", "Detonat
 int main(int argc, char *argv[]) {
     LOG("====================", 1);
     LOG("[MAIN] \t START GAME", 1);
-	if (argc == 2) {
-		string file = argv[1];
-		cout << file << endl;
-		initLevelList(argv[1]);
-	} else {
-		LOG("No startfile specified\n", 1);
+    if (argc == 2) {
+        string file = argv[1];
+        cout << file << endl;
+        initLevelList(argv[1]);
+    } else {
+        LOG("No startfile specified\n", 1);
         cout << "usage: " << argv[0] << " " << "levelListFile" << endl;
-		exit(1);
-	}
+        exit(1);
+    }
 
     glInit(argc, argv);
 
-	return 0;
+    return 0;
 }
 
 static void glInit(int argc, char *argv[]) {
     glutInit(&argc, argv);
-  
+
     /* tell glut to use a double-buffered window with RGB channels */
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
@@ -70,30 +66,30 @@ static void glInit(int argc, char *argv[]) {
     glutInitWindowSize(game.width, game.height);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("StarFighter");
-  	
+
     initScene();
     setUpLighting();
     setUpShading();
-  
+
     glutDisplayFunc(display);
     glutKeyboardFunc(keyPressed);
     glutMouseFunc(mouseClicked);
     glutMotionFunc(mouseMovedPassive);
     glutPassiveMotionFunc(mouseMovedPassive);
-	glutSpecialFunc(keyPressedSpecial);
-	glutIdleFunc(myFrameMove);
+    glutSpecialFunc(keyPressedSpecial);
+    glutIdleFunc(myFrameMove);
     
     glutSetCursor(GLUT_CURSOR_NONE);
     
     //glutFullScreen();
-
+    
     Explosion::loadAnimationFrames();
-	EnvironmentModel::loadImage((char *) "textures/grid.png");
+    EnvironmentModel::loadImage((char *) "textures/grid.png");
     Asteroid::loadMeshes();
     Ball::loadMeshes();
     Bomb::loadMeshes();
     Missile::loadMeshes();
-	
+
     getCurrentTime(&lastTime);
     getCurrentTime(&lastTimeMouse);
 
@@ -116,7 +112,7 @@ static void initLevelList(const char * filename) {
 		string lvlName = line.substr(0, index);
 		int highScore = atoi(line.substr(index+1, line.length() - (lvlName.length() + 1)).c_str());
 
-		game.levels.push_back(new string(lvlName));
+		game.levels.push_back(lvlName);
 		game.highScores.push_back(highScore);
 	}
     
@@ -213,50 +209,6 @@ static void reshape(int width, int height) {
 	gluPerspective(90.0, game.width / game.height, 0.1, game.farClippingPlane);
 }
 
-static void captureToImageFile() {
-    // static unsigned int picNum = 0;
-    // FreeImage_Initialise();
-    // 
-    // FIBITMAP *bitmap = FreeImage_Allocate(game.width, game.height, 24);
-    // 
-    // if (!bitmap) {
-    //     debug("screenshot failed!");
-    //     return;
-    // }
-    // 
-    // int width = int(game.width);
-    // int height = int(game.height);
-    // 
-    // debug("capturing screen of size (%d, %d)", width, height);
-    // GLubyte *pixels = (GLubyte *) malloc(3 * width * height);
-    // glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-    // int rowWidth = (3 * width);
-    // int rowIndex;
-    // RGBQUAD color;
-    // for (int y = 0; y < height; y++) {
-    //     for (int x = 0; x < width; x++) {
-    //         rowIndex = (y * rowWidth) + (3 * x);
-    //         color.rgbRed = pixels[rowIndex + 0];
-    //         color.rgbGreen = pixels[rowIndex + 1];
-    //         color.rgbBlue = pixels[rowIndex + 2];
-    //         FreeImage_SetPixelColor(bitmap, x, y, &color);
-    //     }
-    // }
-    // 
-    // char imageFileName[] = "image-00.png";
-    // imageFileName[7] = '0' + picNum;
-    // if (FreeImage_Save(FIF_PNG, bitmap, imageFileName, 0)) {
-    //     picNum++;
-    //     cout << "successfully captured screenshot to " << string(imageFileName) << endl;
-    // } else {
-    //     cout << "failed to capture screenshot" << endl;
-    // }
-    // 
-    // free(pixels);
-    // 
-    // FreeImage_DeInitialise();
-}
-
 static void keyPressed(unsigned char key, int x, int y) {
 	if (game.currGameState == inGame) {
 		switch (key) {
@@ -283,7 +235,6 @@ static void keyPressed(unsigned char key, int x, int y) {
 	
 	switch (key) {
 	    case 'k': kyleMode = !kyleMode; break;
-		case 'c': captureToImageFile(); break;
 		case ESC: exit(0);
 	}
 }
@@ -295,7 +246,7 @@ static void keyPressedSpecial(int key, int x, int y) {
             case GLUT_KEY_LEFT:     game.selLeft(); break;
             case GLUT_KEY_UP:       game.selUp(); break;
             case GLUT_KEY_DOWN:     game.selDown(); break;
-        }        
+        }
 	}
     
     glutPostRedisplay();
@@ -339,39 +290,39 @@ void setOrthographicProjection() {
     glLoadIdentity();
     gluOrtho2D(0, game.width, 0, game.height);
     /* Invert the y axis so that down is positive. */
-	glScalef(1, -1, 1);
-	/* Move the origin from the bottom left corner to the upper left corner. */
-	glTranslatef(0, -game.height, 0);
+    glScalef(1, -1, 1);
+    /* Move the origin from the bottom left corner to the upper left corner. */
+    glTranslatef(0, -game.height, 0);
     glMatrixMode(GL_MODELVIEW);
 }
 
 void resetPerspectiveProjection() {
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void renderText(float x, float y, void *font, const char *text, Color const& color) {
     /* Courtesy lighthouse3d.com */
     setOrthographicProjection();
-	glPushMatrix();
-	glLoadIdentity();
-	
-	glDisable(GL_LIGHTING);
-	
-	glColor4f(color.r, color.g, color.b, 0.8);
-	
+    glPushMatrix();
+    glLoadIdentity();
+
+    glDisable(GL_LIGHTING);
+
+    glColor4f(color.r, color.g, color.b, 0.8);
+
     int x1 = x;
     for (const char *c = text; *c != '\0'; c++) {
         glRasterPos2f(x1, y);
         glutBitmapCharacter(font, *c);
         x1 += glutBitmapWidth(font, *c) + 1;
     }
-    
+
     glEnable(GL_LIGHTING);
-    
-	glPopMatrix();
-	resetPerspectiveProjection();
+
+    glPopMatrix();
+    resetPerspectiveProjection();
 }
 
 void renderHealthbar(float hp) {

@@ -32,7 +32,7 @@ typedef std::vector<Force *> ForceList;
 typedef std::vector<Enemy *> EnemeyList;
 typedef std::vector<Missile *> MissileList;
 typedef std::vector<Bomb *> BombList;
-typedef std::vector<std::string *> StringList;
+typedef std::vector<std::string> StringList;
 typedef std::vector<int> IntList;
 
 enum Direction {

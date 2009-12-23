@@ -1,7 +1,7 @@
 #!gmake 
 
-CC = g++ -Wall -g
-cc = gcc -Wall -g
+CC = g++ -Wall -g -m32
+cc = gcc -Wall -g -m32
 
 TARGETS = starfighter
 
@@ -20,7 +20,7 @@ MACLIBS = -lGL -lGLU -lm -lstdc++
 MACINCS = -L"/System/Library/Frameworks/OpenGL.framework/Libraries"
 EIGEN = -I eigen2
 FIMAGE = -L./freeimage -lfreeimage
-CCOPTS = $(OPTMAC) $(MACINCS) $(EIGEN) -DOSX -fast
+CCOPTS = $(OPTMAC) $(MACINCS) $(EIGEN) -DOSX -fast -m32
 LDOPTS = $(CCOPTS) $(MACLIBS)
 
 default: $(TARGETS)

@@ -56,8 +56,7 @@ void Explosion::dump() {
     LOG("\tType:\tExplosion",1);
 }
 
-void Explosion::update(){
-    
+void Explosion::update() {
 }
 
 void Explosion::loadAnimationFrames() {
@@ -95,7 +94,7 @@ void Explosion::loadAnimationFrames() {
 	Explosion::texture_ids[i] = loadImage((char *) "animations/blank.png");
 }
 
-GLuint Explosion::loadImage(char * filename) {
+GLuint Explosion::loadImage(char *filename) {
 	GLuint texture_id = SOIL_load_OGL_texture
 	(
 		filename,

@@ -79,13 +79,12 @@ public:
         dead = true;
 	}
 
-	// ensures we only accumulate the score once
+	/** Ensures we only accumulate the score once. */
 	int getScore() {
 		int oldScore = score;
 		score = 0;
 		return oldScore;
 	}
-
 	
     Eigen::Matrix4f transM;
     Geometry* mesh;
@@ -195,7 +194,7 @@ private:
         damage = 0;
         score = 0;
         dead = false;
-        bs = new BoundingSphere(this);
+        bs = NULL;
         shipPart = false;
         isAsteroid = false;
         indestructable = false;

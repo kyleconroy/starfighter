@@ -1,9 +1,6 @@
 #include "game.h"
-#include "box.h"
-#include "objgeometry.h"
-#include "ball.h"
-#include "projectile.h"
 #include "parser.h"
+#include "projectile.h"
 #include <math.h>
 #include <string>
 
@@ -37,7 +34,7 @@ void Game::loadCurrLevel() {
     }
     
 	std::string lvlName("./levels/");
-	lvlName.append(*levels.at(currIndex));
+	lvlName.append(levels.at(currIndex));
 	lvlName.append(".level");
 	Parser gp(lvlName);
 	level = gp.parse();
@@ -85,7 +82,7 @@ void Game::fireMissile() {
 
 void Game::fireBomb(float seconds) {
     float power = std::min(seconds, (float)3.0)/3.0;
-    Bomb* bomb = new Bomb(power, myShip);	
+    Bomb* bomb = new Bomb(power, myShip);
     level->amodels->push_back(bomb);
     level->bombs->push_back(bomb);
 }
@@ -149,7 +146,7 @@ void Game::drawStartMenu() {
 	// now render text for each of the possible levels
 	int currHeight = 170;
 	for (unsigned int i = 0; i < levels.size(); i++) {
-		char* levelName = (char*) levels.at(i)->c_str();
+		char* levelName = (char *) levels.at(i).c_str();
 		char highScore [10];
 		itoa(highScores.at(i), highScore);
 		
